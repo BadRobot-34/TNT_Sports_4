@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Reproductor Clappr - Canal DASH</title>
+  <style>
+    html, body { width: 100%; height: 100%; margin: 0; padding: 0; background: #000; overflow: hidden; }
+    #player { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
+  </style>
+
+  <!-- Clappr Core -->
+  <script src="https://cdn.jsdelivr.net/npm/@clappr/player@latest/dist/clappr.min.js"></script>
+  <!-- Shaka Player Core -->
+  <script src="https://cdn.jsdelivr.net/npm/shaka-player@4.3.6/dist/shaka-player.compiled.js"></script>
+  <!-- Plugin Dash Shaka -->
+  <script src="https://cdn.jsdelivr.net/npm/dash-shaka-playback@latest/dist/dash-shaka-playback.js"></script>
+</head>
+<body>
+
+<div id="player"></div>
+
+<script>
+  const hexKid = "7ff2823a23a3d548b0a997efd4c0607d";
+  const hexKey = "e24f4692484a0de3beecdd182e0787e9";
+
+  var player = new Clappr.Player({
+    source: 'https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/tdijwiga2k/out/v1/f5fde318678f4f7583bf27b7231bde1f/cenc.mpd',
+    parentId: '#player',
+    plugins: [DashShakaPlayback],
+    shakaOnBeforeLoad: function(shakaPlayer) {
+      const clearKeysConfig = {};
+      clearKeysConfig[hexKid] = hexKey;
+
+      shakaPlayer.configure({
+        drm: {
+          clearKeys: clearKeysConfig
+        }
+      });
+    },
+    autoPlay: true,
+    mute: false,
+    volume: 100,
+    width: '100%',
+    height: '100%'
+  });
+</script>
+
+</body>
+</html>
