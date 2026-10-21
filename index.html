@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Antena 3 - Reproductor Clappr</title>
+  <title>Reproductor DASH - tntsports4uk</title>
   <style>
     html, body { width: 100%; height: 100%; margin: 0; padding: 0; background: #000; overflow: hidden; }
     #player { width: 100%; height: 100%; position: fixed; top: 0; left: 0; }
@@ -21,12 +21,12 @@
 <div id="player"></div>
 
 <script>
-  // Si las claves ya están en formato HEX plano, úsalas directamente:
-  const hexKid = "7ff2823a23a3d548b0a997efd4c0607d";
-  const hexKey = "e24f4692484a0de3beecdd182e0787e9";
+  // KID extraído del manifiesto (FA34FA8C90336DD528C7A23871CAD1FE en formato plano minúscula)[cite: 1]
+  const hexKid = "fa34fa8c90336dd528c7a23871cad1fe";
+  const hexKey = "552a78d1aeb74f1650d68255c5749408"; // Clave de descifrado correspondiente
 
   var player = new Clappr.Player({
-    source: 'https://otte.cache.aiv-cdn.net/bom-nitro/live/clients/dash/enc/tdijwiga2k/out/v1/f5fde318678f4f7583bf27b7231bde1f/cenc.mpd',
+    source: 'https://otte.live.fly.ww.aiv-cdn.net/bom-nitro/live/clients/dash/enc/tdijwiga2k/out/v1/f5fde318678f4f7583bf27b7231bde1f/cenc.mpd',
     parentId: '#player',
     plugins: [DashShakaPlayback],
     shakaOnBeforeLoad: function(shakaPlayer) {
